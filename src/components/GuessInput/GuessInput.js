@@ -12,7 +12,7 @@ const GuessInput = ({ onGuess }) => {
     setGuess("");
   };
   return (
-    <form class="guess-input-wrapper" onSubmit={onSubmit}>
+    <form className="guess-input-wrapper" onSubmit={onSubmit}>
       <label htmlFor="guess-input">Enter guess:</label>
       <input
         id="guess-input"

@@ -13,17 +13,21 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
+  const [status, setStatus] = React.useState("playing");
   const [guesses, setGuesses] = React.useState([]);
 
-  const status =
-    guesses.length < NUM_OF_GUESSES_ALLOWED
-      ? guesses[guesses.length - 1] === answer
-        ? "won"
-        : "playing"
-      : "lost";
-
-  const onGuess = (guess) =>
-    guesses.indexOf(guess) < 0 && setGuesses([...guesses, guess]);
+  const onGuess = (guess) => {
+    if (guesses.indexOf(guess) < 0) {
+      const nextGuesses = [...guesses, guess];
+      setGuesses(nextGuesses);
+      if (guess === answer) {
+        setStatus("won");
+      }
+      if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
+        setStatus("lost");
+      }
+    }
+  };
 
   return (
     <>

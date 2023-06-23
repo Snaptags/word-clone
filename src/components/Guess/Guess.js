@@ -1,13 +1,14 @@
 import React from "react";
 import { range } from "../../utils";
+import { checkGuess } from "../../game-helpers";
 
-const Guess = ({ children }) =>
+const Guess = ({ answer, children }) =>
   (!children || children.length !== 5
-    ? Array.from(range(0, 5).map(() => ""))
-    : children.split("")
-  ).map((character, index) => (
-    <span className="cell" key={index}>
-      {character}
+    ? Array.from(range(0, 5).map(() => ({})))
+    : checkGuess(children, answer)
+  ).map(({ letter, status }, index) => (
+    <span className={`cell ${status}`} key={index}>
+      {letter}
     </span>
   ));
 
